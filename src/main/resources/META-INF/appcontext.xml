@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="server" class="com.chai.mockit.server.transport.TcpServerTransport" init-method="start">
+        <property name="port" value="8086"/>
+    </bean>
+
+    <bean id="springServerHandler" class="com.chai.mockit.test.SpringServerHandler"></bean>
+
+    <bean id="post" class="com.chai.mockit.server.spring.MockServerBeanPost"/>
+
+</beans>
