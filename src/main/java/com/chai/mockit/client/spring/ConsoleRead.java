@@ -17,12 +17,21 @@ public class ConsoleRead implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
 
+    private int remotePort;
+
+    private RemoteConsole remoteConsole;
+
+    public void setRemotePort(int remotePort) {
+        this.remotePort = remotePort;
+    }
+
     public void setApplicationContext(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
         consoleHandler.setApplicationContext(applicationContext);
     }
 
     public void start(){
+        openConsoleOnRemote();
         Thread t = new Thread(new Runnable() {
             public void run() {
                 startConsole();
@@ -32,17 +41,23 @@ public class ConsoleRead implements ApplicationContextAware {
         t.start();
     }
 
+    private void openConsoleOnRemote(){
+        remoteConsole = new RemoteConsole(remotePort);
+    }
+
     private void startConsole(){
-        Scanner scanner = new Scanner(System.in);
         while(true){
             System.out.print("MockIt:");
-            String line = scanner.nextLine();
+            String line = remoteConsole.getScanner().nextLine();
             if (line == null || line.trim().length()<=0) {
                 continue;
             }
+            String[] datas = line.split(" ");
+            String methodName = datas[0];
+            String args = datas.length > 1 ? datas[1]:null;
             try {
-                Method method = ConsoleHandler.class.getMethod(line, null);
-                Object result = method.invoke(consoleHandler, null);
+                Method method = ConsoleHandler.class.getMethod(methodName, String.class);
+                Object result = method.invoke(consoleHandler, args);
                 if (result != null){
                     System.out.println(result);
                 }

@@ -3,7 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="ConsoleRead" class="com.chai.mockit.client.spring.ConsoleRead" init-method="start"/>
+    <bean id="ConsoleRead" class="com.chai.mockit.client.spring.ConsoleRead" init-method="start">
+    </bean>
 
     <bean id="poster" class="com.chai.mockit.client.spring.ClientBeanPost"/>
 

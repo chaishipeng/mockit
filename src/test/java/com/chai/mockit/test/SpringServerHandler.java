@@ -11,7 +11,7 @@ import java.util.List;
 public class SpringServerHandler {
 
     public Object test(List params) {
-        return "duruitao";
+        return "chaishipeng";
     }
 
 }
