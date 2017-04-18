@@ -7,11 +7,11 @@ import java.util.List;
 /**
  * Created by chaishipeng on 2017/4/18.
  */
-@MockItServer(className = "com.chai.mockit.test.BookService")
+@MockItServer(className = "com.chai.mockit.client.test.TestService")
 public class SpringServerHandler {
 
-    public Object getBookName(List params) {
-        return "tdadadasda";
+    public Object test(List params) {
+        return "duruitao";
     }
 
 }
