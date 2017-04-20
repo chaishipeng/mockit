@@ -11,6 +11,9 @@ import java.lang.reflect.Method;
  * Created by chaishipeng on 2017/4/18.
  */
 public class ClientBeanPost implements BeanPostProcessor {
+
+    private String proxyType = "JDK";
+
     public Object postProcessBeforeInitialization(Object o, String s) throws BeansException {
         return o;
     }
@@ -34,6 +37,10 @@ public class ClientBeanPost implements BeanPostProcessor {
     }
 
     private Object getProxy(Object o){
-        return MockItFactory.mock(o);
+        return MockItFactory.mock(o, proxyType);
+    }
+
+    public void setProxyType(String proxyType) {
+        this.proxyType = proxyType;
     }
 }

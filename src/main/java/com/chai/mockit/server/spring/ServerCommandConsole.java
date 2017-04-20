@@ -51,6 +51,9 @@ public class ServerCommandConsole extends CommandConsole implements ConsoleHandl
 
     public void _sqa(String args, PrintStream ps){
         String sql = "select * from " + Configs.mockItDB;
+        if (args != null && args.trim().length() > 0){
+            sql = "select * from " + Configs.mockItDB + " where id = '" + args + "'";
+        }
         queryAndPrint(sql, ps);
     }
 
@@ -68,13 +71,8 @@ public class ServerCommandConsole extends CommandConsole implements ConsoleHandl
         _se(sql, ps);
     }
 
-    public void _sqc(String sql , PrintStream ps){
+    public void _sqac(String sql , PrintStream ps){
         sql = "select * from " + Configs.mockItDB + " where " + sql;
-        queryAndPrint(sql, ps);
-    }
-
-    public void _sqci(String id , PrintStream ps){
-        String sql = "select * from " + Configs.mockItDB + " where id = '" + id + "'";
         queryAndPrint(sql, ps);
     }
 

@@ -2,6 +2,7 @@ package com.chai.mockit.server.transport;
 
 import com.chai.mockit.client.transport.ObjectAndByte;
 import com.chai.mockit.common.Constants;
+import com.chai.mockit.common.parsepack.PackParse;
 import com.chai.mockit.common.serialize.Serialize;
 import com.chai.mockit.common.utils.MockServiceLoader;
 import com.chai.mockit.server.controller.ServerController;
@@ -16,7 +17,7 @@ import java.util.Map;
 /**
  * Created by chaishipeng on 2017/4/18.
  */
-public class TcpServerTransport implements ServerTransport {
+public class TcpServerTransport extends PackParse implements ServerTransport {
 
     private Serialize serialize = MockServiceLoader.loadService(Serialize.class);
 
@@ -44,30 +45,22 @@ public class TcpServerTransport implements ServerTransport {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
-    private void handler(Socket socket)throws IOException{
-        int length = socket.getInputStream().read();
-        byte[] recvBytes = new byte[length];
-        socket.getInputStream().read(recvBytes);
-        Map<String,String> recvMap = (Map<String, String>) ObjectAndByte.toObject(recvBytes);
-        String className = (String) recvMap.get(Constants.PACK_CLASS_KEY);
-        String methodName = (String) recvMap.get(Constants.PACK_METHOD_KEY);
-        String paramStr = (String) recvMap.get(Constants.PACK_PARAMS_KEY);
+    private void handler(Socket socket) throws IOException, ClassNotFoundException {
+        Map<String,String> recvMap = (Map<String, String>) super.readPack(socket.getInputStream());
+        String className = recvMap.get(Constants.PACK_CLASS_KEY);
+        String methodName = recvMap.get(Constants.PACK_METHOD_KEY);
+        String paramStr = recvMap.get(Constants.PACK_PARAMS_KEY);
         List<Map<String,Object>> params = serialize.deSerialize(paramStr, List.class);
 
-        Object result = serverController.handler(className, methodName, params);
+        String result = serverController.handler(className, methodName, params);
+        recvMap.put(Constants.PACK_RETURN_KEY, result);
 
-        String res = serialize.serialize(result);
-        recvMap.put(Constants.PACK_RETURN_KEY, res);
-
-        byte[] sendBytes = ObjectAndByte.toByteArray(recvMap);
-        int sendlength = sendBytes.length;
-
-        socket.getOutputStream().write(sendlength);
-        socket.getOutputStream().write(sendBytes);
-        socket.getOutputStream().flush();
+        super.writePack(socket.getOutputStream(), recvMap);
     }
 
     public void setPort(int port) {

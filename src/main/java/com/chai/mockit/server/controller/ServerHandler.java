@@ -8,6 +8,6 @@ import java.util.Map;
  */
 public interface ServerHandler {
 
-    Object handler(String methodName,List<Map<String,Object>> params);
+    String handler(String methodName,List<Map<String,Object>> params);
 
 }

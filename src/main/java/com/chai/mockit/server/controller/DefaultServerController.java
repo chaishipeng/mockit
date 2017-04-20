@@ -16,7 +16,7 @@ public class DefaultServerController implements ServerController {
         return this;
     }
 
-    public Object handler(String className,String methodName, List<Map<String,Object>> params){
+    public String handler(String className,String methodName, List<Map<String,Object>> params){
         ServerHandler serverHandler = handlers.get(className);
         return serverHandler.handler(methodName, params);
     }

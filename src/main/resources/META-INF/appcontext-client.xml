@@ -8,6 +8,6 @@
 
     <bean id="poster" class="com.chai.mockit.client.spring.ClientBeanPost"/>
 
-    <bean id="testService" class="com.chai.mockit.client.test.TestService"/>
+    <bean id="testService" class="com.chai.mockit.client.test.TestServiceImpl"/>
 
 </beans>

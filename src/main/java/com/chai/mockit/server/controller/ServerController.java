@@ -11,6 +11,6 @@ public interface ServerController {
 
     ServerController registerHandler(String className, ServerHandler handler);
 
-    Object handler(String className,String methodName, List<Map<String,Object>> params);
+    String handler(String className,String methodName, List<Map<String,Object>> params);
 
 }

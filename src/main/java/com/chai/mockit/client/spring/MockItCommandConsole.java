@@ -47,7 +47,7 @@ public class MockItCommandConsole extends CommandConsole implements ConsoleHandl
     }
 
     public void _test(String args, PrintStream ps){
-        TestService testService = (TestService) applicationContext.getBean("testService");
+        TestService testService = applicationContext.getBean(TestService.class);
         ps.println(testService.test(args));
     }
 

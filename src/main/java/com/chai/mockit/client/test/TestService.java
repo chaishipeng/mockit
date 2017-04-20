@@ -5,11 +5,8 @@ import com.chai.mockit.client.annotation.MockIt;
 /**
  * Created by chaishipeng on 2017/4/18.
  */
-public class TestService {
+public interface TestService {
 
-    @MockIt
-    public String test(String params){
-        return "NotMock";
-    }
+    String test(String params);
 
 }

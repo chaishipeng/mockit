@@ -1,5 +1,8 @@
 package com.chai.mockit.server.controller;
 
+import com.chai.mockit.common.serialize.Serialize;
+import com.chai.mockit.common.utils.MockServiceLoader;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -12,11 +15,13 @@ public class ReflectServerHandler implements ServerHandler {
 
     private Object handler;
 
+    private Serialize serialize = MockServiceLoader.loadService(Serialize.class);
+
     public ReflectServerHandler(Object handler){
         this.handler = handler;
     }
 
-    public Object handler(String methodName, List<Map<String, Object>> params) {
+    public String handler(String methodName, List<Map<String, Object>> params) {
         try {
             Method method = handler.getClass().getMethod(methodName, List.class);
             if (method == null) {
@@ -24,7 +29,7 @@ public class ReflectServerHandler implements ServerHandler {
             }
             try {
                 Object result = method.invoke(handler, params);
-                return result;
+                return format(result);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             } catch (InvocationTargetException e) {
@@ -34,5 +39,15 @@ public class ReflectServerHandler implements ServerHandler {
             throw new RuntimeException(methodName + " not exits or Params not is List");
         }
         return null;
+    }
+
+    private String format(Object obj) {
+        if (obj == null){
+            return "";
+        }
+        if (obj.getClass().isPrimitive() || obj.getClass() == String.class){
+            return obj.toString();
+        }
+        return serialize.serialize(obj);
     }
 }

@@ -13,7 +13,7 @@ public class DBController implements ServerController{
         return null;
     }
 
-    public Object handler(String className, String methodName, List<Map<String, Object>> params) {
+    public String handler(String className, String methodName, List<Map<String, Object>> params) {
         SqliteDB.Result result =  SqliteDB.queryForList("select content from mockitdb where classname = '" + className + "' and methodname = '" + methodName + "'");
         List<Map<String, String>> res = result.getDatas();
         if (res!= null && res.size() >= 1){
