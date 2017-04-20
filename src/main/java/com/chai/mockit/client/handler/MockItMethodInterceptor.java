@@ -75,6 +75,9 @@ public class MockItMethodInterceptor<T> implements MethodInterceptor {
         }
         int index = 0;
         for (Object obj : objects){
+            if (obj == null){
+                continue;
+            }
             Map<String,Object> param = new HashMap<String, Object>();
             param.put("Class", obj.getClass().getName());
             param.put("Data", obj);

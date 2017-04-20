@@ -4,8 +4,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="server" class="com.chai.mockit.server.transport.TcpServerTransport" init-method="start">
-        <property name="port" value="8086"/>
+        <property name="port" value="10020"/>
     </bean>
+
+    <bean id="serverCommandConsole" class="com.chai.mockit.server.spring.ServerCommandConsole" init-method="start"/>
 
     <bean id="springServerHandler" class="com.chai.mockit.test.SpringServerHandler"></bean>
 

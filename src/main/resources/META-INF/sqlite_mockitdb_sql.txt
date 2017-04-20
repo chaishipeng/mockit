@@ -1,0 +1,1 @@
+create table mockitdb('id' integer PRIMARY KEY, 'classname' varchar(50), 'methodname' varchar(20), 'content' varchar(1000));

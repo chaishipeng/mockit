@@ -45,6 +45,16 @@
             <artifactId>netty</artifactId>
             <version>3.9.9.Final</version>
         </dependency>
+        <dependency>
+            <groupId>com.chai.simconsole</groupId>
+            <artifactId>simconsole</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.7.2</version>
+        </dependency>
     </dependencies>
 
 
