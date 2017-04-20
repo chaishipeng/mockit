@@ -9,7 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 /**
  * Created by chaishipeng on 2017/4/18.
  */
-public class BookServiceTest {
+public class MockClientTest {
 
     public static void main(String[] args)throws Exception {
         /*BookService bookService = new BookService();

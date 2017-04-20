@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * Created by chaishipeng on 2017/4/18.
  */
-public class SpringTest {
+public class MockServerTest {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 

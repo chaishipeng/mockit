@@ -9,8 +9,8 @@
 
     <bean id="serverCommandConsole" class="com.chai.mockit.server.spring.ServerCommandConsole" init-method="start"/>
 
-    <bean id="springServerHandler" class="com.chai.mockit.test.SpringServerHandler"></bean>
+    <!--<bean id="springServerHandler" class="com.chai.mockit.test.SpringServerHandler"></bean>
 
-    <bean id="post" class="com.chai.mockit.server.spring.MockServerBeanPost"/>
+    <bean id="post" class="com.chai.mockit.server.spring.MockServerBeanPost"/>-->
 
 </beans>
